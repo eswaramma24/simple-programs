@@ -1,0 +1,196 @@
+1. setup a local database, create a table, insert some records using any database client.
+
+create table Employee(
+eid number(10),
+ename varchar2(10),
+edis varchar2(10),
+ephone number(20),
+eaddress varchar2(10));
+
+DESCRIBE Employee;
+
+insert into Employee values(eid, ename, edis, ephone, eaddress) values
+(600,'eswari','Software-trainee','9652482744','kadapa');
+(601,'haseena','Software-trainee','8959392011','hyderbad');
+(602,'nani','Software-trainee','9848274422','mumbai');
+(603,'gopal',''Software-trainee,'9703214452','kolkata');
+(604,'ram','Software-trainee','9154021315','chennai');
+(605,'alwar','Software-trainee','9908702452','bangalore');
+
+
+select * from Employee;
+
+
+create database  manager;
+create table manager.Employee;
+mid varchar2(10),
+mname varchar2(10),
+mmail varchar2(10));
+
+
+
+
+
+insert into faculty.Employee(mid,mname,msalary,mmail) values
+('101', 'eswari', '200000','eswari@gmail.com'),
+('102', ' haseena','400000','haseena@gmailcom'),
+('103', 'nani', '500000','nani@gmail.com'),
+('104', 'sudha', '600000','sudha@gmail.com'),
+('105', ' ram,'700000','ram@gmailcom'),
+('106', 'abhi', '800000','abhi@gmail.com');
+
+
+
+
+2.write a Sql to insert and retrive records from the above table using the same databse client
+   update employee set ephone='9848861754' where sid='601';
+update employee set ephone='9381022376' where sid='602';
+update employee set ephone='9908702443' where sid='603';
+select * from manger;
+delete from employe where mno=101;
+delete from employee where sno=102;
+select * from manger;
+
+
+3.   write java code to insert and retrieve the records from the the database table.
+
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+public class Demo3{
+static final String DB_URL=" jdbc:mysql://localhost :3306/ eswari";
+static final String USERNAME=" eswari ";
+static final String PASSWORD=" eswari965";
+public static void main(String[] args){
+try(
+Connection con=DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
+statement stmt=con.createStatement();
+)
+{
+System.out.println(" inserting records into table:");
+String sql=" INSERT INTO emp values(501,'eswari',50000,'kadapa')";
+stmt.executeUpdate(sql);
+String sql=" INSERT INTO emp values(502,'sudha',50000,'Hydrabad')";
+stmt.executeUpdate(sql);
+String sql=" INSERT INTO emp values(503,'lakshmi',50000,'Bangalore')";
+stmt.executeUpdate(sql);
+String sql=" INSERT INTO emp values(504,'abhi',50000,'Chennai')";
+stmt.executeUpdate(sql);
+String sql=" INSERT INTO emp values(505,'swetha',50000,'chitvel')";
+stmt.executeUpdate(sql);
+String sql=" INSERT INTO emp values(506,'Mounika',50000,'Badvel')";
+stmt.executeUpdate(sql);
+String sql=" INSERT INTO emp values(507,'Ram',50000,'Chitoor')";
+stmt.executeUpdate(sql);
+String sql=" INSERT INTO emp values(508,'Gopal',50000,'Sholinganallur')";
+stmt.executeUpdate(sql);
+String sql=" INSERT INTO emp values(509,'Hassena',50000,'Siruseri')";
+stmt.executeUpdate(sql);
+String sql=" INSERT INTO emp values(510,'Nani',50000,'Punganur')";
+stmt.executeUpdate(sql);
+System.out.println(" inserted records to the table.......");
+}
+catch(SQLException e){
+e.printStackTrace();
+}
+}
+
+4. create a REST API in java to insert and retrieve the same records.
+package com.helppoint;
+
+import java.io.Serializable;
+import javax.xml.bind.annotation.XmlElement; 
+import javax.xml.bind.annotation.XmlRootElement; 
+@XmlRootElement(name = "employ") 
+public class Employ implements Serializable {
+private static final long serialVersionUID = 1L; 
+private int id; 
+private String name; 
+private String profession;
+public Employ(){}
+public Employ(int id, String name, String profession){ 
+this.id = id;
+this.name = name; 
+this.profession = profession;
+} 
+public int getId() {
+return id; 
+}
+@XmlElement 
+public void setId(int id) {
+this.id = id;
+}
+public String getName() {
+return name; 
+}
+@XmlElement 
+public void setName(String name) {
+this.name = name;
+}
+public String getProfession() { 
+return profession; }
+@XmlElement
+public void setProfession(String profession) {
+this.profession = profession;
+}
+}
+
+
+
+EmployService.java
+
+
+package com.helppoint;
+
+import java.util.List;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType; 
+@Path("/EmployService")
+public class EmployService { 
+EmployDao employDao = new EmployDao();
+@GET 
+@Path("/employ") 
+@Produces(MediaType.APPLICATION_XML) public List<Employ> getEmploys(){ 
+return employDao.getAllEmploys();
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
